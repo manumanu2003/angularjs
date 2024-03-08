@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="fullNameApp">
+<head>
+<title>AngularJS Full Name App</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="fullNameCtrl">
+<h2>Enter your name:</h2>
+<label for="firstName">First Name:</label>
+<input type="text" ng-model="firstName" placeholder="Enter your first name">
+<label for="lastName">Last Name:</label>
+<input type="text" ng-model="lastName" placeholder="Enter your last name">
+<br>
+<button ng-click="displayFullName()">Display Full Name</button>
+<br>
+<p ng-show="fullName">Your Full Name: {{ fullName }}</p>
+<script>
+var app = angular.module('fullNameApp', []);
+app.controller('fullNameCtrl', function ($scope) {
+// Default values
+$scope.firstName = 'John';
+$scope.lastName = 'Doe';
+$scope.displayFullName = function () {
+// Concatenate first name and last name
+$scope.fullName = $scope.firstName + ' ' + $scope.lastName;
+};
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="employeeApp">
+<head>
+<meta charset="UTF-8">
+<title>Employee Search</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+</head>
+<body>
+<div ng-controller="EmployeeController as employeeCtrl">
+<h2>Employee List</h2>
+<label>Search by Name:</label>
+<input type="text" ng-model="employeeCtrl.searchName">
+<label>Search by Salary:</label>
+<input type="number" ng-model="employeeCtrl.searchSalary">
+<table border="1">
+<tr>
+<th>Name</th>
+<th>Salary</th>
+</tr>
+<tr ng-repeat="employee in employeeCtrl.employees | filter:{name:
+employeeCtrl.searchName, salary: employeeCtrl.searchSalary}">
+<td>{{ employee.name }}</td>
+<td>{{ employee.salary | currency }}</td>
+</tr>
+</table>
+</div>
+<script>
+angular.module('employeeApp', [])
+.controller('EmployeeController', function () {
+var vm = this;
+vm.employees = [
+{ name: 'John Doe', salary: 50000 },
+{ name: 'Jane Doe', salary: 60000 },
+{ name: 'Bob Smith', salary: 75000 },
+// Add more employee details as needed
+];
+vm.searchName = '';
+vm.searchSalary = '';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="dateApp">
+<head>
+<meta charset="UTF-8">
+<title>AngularJS Date Display</title>
+<script
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+<div ng-controller="DateController">
+<h2>Current Date and Time</h2>
+<p>Default Format: {{ currentDate }}</p>
+<p>Custom Format: {{ currentDate | date:'fullDate' }}</p>
+<p>Time Only: {{ currentDate | date:'shortTime' }}</p>
+<p>Day: {{ currentDate | date:'EEEE' }}</p>
+</div>
+<script>
+var app = angular.module('dateApp', []);
+app.controller('DateController', function ($scope, $interval) {
+// Update the date every second
+$interval(function () {
+$scope.currentDate = new Date();
+}, 1000);
+});
+</script>
+</body>
+</html>

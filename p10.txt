@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="itemApp">
+<head>
+<meta charset="UTF-8">
+<title>Item Collection</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+</head>
+<body>
+<div ng-controller="ItemController as itemCtrl">
+<h2>Item Collection</h2>
+<label>Add Item:</label>
+<input type="text" ng-model="itemCtrl.newItemName">
+<button ng-click="itemCtrl.addItem()">Add</button>
+<ul>
+<li ng-repeat="item in itemCtrl.items">
+{{ item.name }}
+<button ng-click="itemCtrl.removeItem(item)">Remove</button>
+</li>
+</ul>
+<p>Total Number of Items: {{ itemCtrl.items.length }}</p>
+</div>
+<script>
+angular.module('itemApp', [])
+.controller('ItemController', function () {
+var vm = this;
+vm.items = [
+{ name: 'Item 1' },
+{ name: 'Item 2' },
+{ name: 'Item 3' },
+// Add more default items as needed
+];
+vm.newItemName = '';
+vm.addItem = function () {
+if (vm.newItemName.trim() !== '') {
+vm.items.push({ name: vm.newItemName });
+vm.newItemName = ''; // Clear the input field after adding an item
+}
+};
+vm.removeItem = function (item) {
+var index = vm.items.indexOf(item);
+if (index !== -1) {
+vm.items.splice(index, 1);
+}
+};
+});
+</script>
+</body>
+</html>

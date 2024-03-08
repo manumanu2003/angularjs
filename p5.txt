@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="studentApp">
+<head>
+<title>AngularJS Student App</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="studentCtrl">
+<h2>Student Details</h2>
+<label for="numberOfStudents">Enter the Number of Students:</label>
+<input type="number" ng-model="numberOfStudents">
+<button ng-click="displayStudentDetails()">Display Student Details</button>
+<br>
+<p ng-show="students.length > 0">Total Students: {{ students.length }}</p>
+<ul>
+<li ng-repeat="student in students">Name: {{ student.name }}, CGPA: {{ student.cgpa
+}}</li>
+</ul>
+<script>
+var app = angular.module('studentApp', []);
+app.controller('studentCtrl', function ($scope) {
+$scope.students = [
+{ name: 'John', cgpa: 3.5 },
+{ name: 'Jane', cgpa: 3.8 },
+{ name: 'Bob', cgpa: 3.2 }
+];
+$scope.displayStudentDetails = function () {
+$scope.students = $scope.students.slice(0, $scope.numberOfStudents);
+};
+});
+</script>
+</body>
+</html>
